@@ -78,9 +78,8 @@ jobs:
           yarn install --network-timeout 1000000
           yarn run check
 
-      - name: Tauri build
-        uses: tauri-apps/tauri-action@v0
+      - name: Build Electron App
+        run: |
+          npx electron-builder build --${{ matrix.os }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
-          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
+          ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: true
